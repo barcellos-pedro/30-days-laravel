@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Job;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class JobController extends Controller
 {
@@ -70,3 +73,24 @@ class JobController extends Controller
         return redirect('/jobs');
     }
 }
+
+// Ways of doing Auth for edit/update
+
+/* Auth done by Middleware (in routes) and Policy */
+
+// if (Auth::guest()) {
+//    return redirect('/login');
+// }
+
+// inline Auth without Gate
+// if ($job->employer->user->isNot(Auth::user())) {
+//    abort(403);
+// }
+
+// Can/cannot based on Gate (see show view)
+// if (Auth::user()->cannot('edit-job', $job)) {
+//    dd('failure');
+// }
+
+// Auth Gate defined in AppServiceProvider
+// Gate::authorize('edit-job', $job);

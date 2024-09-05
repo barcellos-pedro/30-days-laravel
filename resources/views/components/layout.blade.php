@@ -20,15 +20,13 @@
                         <div class="ml-10 flex items-baseline space-x-4">
                             <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
                             <x-nav-link href="/jobs" :active="request()->is('jobs')">Jobs</x-nav-link>
-                            <x-nav-link href="/jobs/create" :active="request()->is('jobs/create')">Create Job
-                            </x-nav-link>
-                            <x-nav-link href="/contact" type="button" :active="request()->is('contact')">Contact
-                            </x-nav-link>
+                            <x-nav-link href="/jobs/create" :active="request()->is('jobs/create')">Create Job</x-nav-link>
+                            <x-nav-link href="/contact" type="button" :active="request()->is('contact')">Contact</x-nav-link>
                         </div>
                     </div>
                 </div>
                 <div class="hidden md:block">
-                    <div class="ml-4 flex items-center gap-3 md:ml-6">
+                    <div class="ml-4 flex items-center gap-5 md:ml-6">
                         @guest
                             <x-nav-link href="/register" :active="request()->is('register')">
                                 Register
@@ -39,9 +37,13 @@
                         @endguest
 
                         @auth
+                            <p class="text-white font-medium">
+                                {{ auth()->user()->first_name }}
+                            </p>
+
                             <form method="POST" action="/logout">
                                 @csrf
-                                <x-form-button type="submit">Log Out</x-form-button>
+                                <x-form-button>Log Out</x-form-button>
                             </form>
                         @endauth
                     </div>
